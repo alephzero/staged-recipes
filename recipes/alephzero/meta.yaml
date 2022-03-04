@@ -1,0 +1,44 @@
+{% set name = "alephzero" %}
+{% set version = "0.3.13" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/alephzero-{{ version }}.tar.gz
+  sha256: a2a17da1b6f85987127fed5d6c56da8963696ced7fac1fe70d6f6c1b2306df2f
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - pip
+    - pybind11
+    - python
+  run:
+    - click >=8.0.3
+    - jsonpointer >=2.1
+    - python
+    - websocket-client >=1.2.1
+
+test:
+  imports:
+    - alephzero
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/alephzero/alephzero
+  summary: 'TODO: description'
+  license: Unlicense
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - alephzero
